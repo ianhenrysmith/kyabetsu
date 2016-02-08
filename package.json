@@ -42,6 +42,8 @@
     "material-ui": "0.14.4",
     "react": "0.14.6",
     "react-dom": "0.14.6",
+    "react-dragula": "1.1.13",
+    "react-tap-event-plugin": "0.2.2",
     "webpack": "1.12.12"
   },
   "devDependencies": {

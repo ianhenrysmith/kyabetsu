@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+import AppBar from 'material-ui/lib/app-bar';
+
+import Stage from '../Stage/stage';
+
 class IndexComponent extends Component {
   render() {
-    if (this.props.items.length === 0) {
-      return (
-        <p ref="empty">Index is empty.</p>
-      );
-    }
-
     return (
-      <section>
-        <h2>Hello There</h2>
-        <ul ref="indexList" className="index-list">
-          {this.props.items.map((item, index) => {
-            return (<li key={index}>item {item}</li>);
-          })}
-        </ul>
+      <section id="stagesContainer">
+        <AppBar title="Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" />
+
+        <Stage stageName="Idea" stageDescription="Just wondering..." />
+        <Stage stageName="Design" stageDescription="Work in progress" />
+        <Stage stageName="In Progress" stageDescription="Make it happen people" />
+        <Stage stageName="Acceptance" stageDescription="We're all just looking for acceptance" />
+        <Stage stageName="Deployed" stageDescription="It's real and it's fantastic" />
       </section>
     );
   }

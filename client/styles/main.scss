@@ -1,6 +1,18 @@
-$background: lightblue;
-
 body {
-  background: $background;
+  background: white;
   font-family: "Helvetica Neue", serif;
+}
+
+.itemCard {
+  margin: 10px;
+}
+
+.stageCard {
+  display: inline-block;
+  margin: 20px 10px;
+  width: calc(20% - 20px);
+}
+
+#stagesContainer {
+  min-width: 1200px;
 }
