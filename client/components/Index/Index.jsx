@@ -37,7 +37,7 @@ class IndexComponent extends Component {
   render() {
     return (
       <section id="stagesContainer">
-        <AppBar title="Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" />
+        <AppBar title="Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar" />
 
         <Stage ref="stage_idea" stageName="Idea" stageDescription="Just wondering..." />
         <Stage ref="stage_design" stageName="Design" stageDescription="Work in progress" />
