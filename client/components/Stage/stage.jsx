@@ -4,33 +4,36 @@ import CardHeader from "material-ui/lib/card/card-header";
 
 import Item from "../Item/item";
 
+import itemsStore from "../../stores/itemsStore";
+
 class StageComponent extends Component {
+  renderItems() {
+    var items = itemsStore.getItemsForStageId(this.props.stage.shortname);
+
+    return (
+      <div className="itemsList itemsContainer" ref="items">
+        {
+          _.map(items, function(item) {
+            return (
+              <Item item={item} />
+            )
+          })
+        }
+      </div>
+    )
+  }
+
   render() {
-    var description = this.props.stageDescription;
-    var title = this.props.stageName;
+    var stage = this.props.stage;
 
     return (
       <Card className="stageCard">
-        <CardHeader title={title} subtitle={description} />
+        <CardHeader title={stage.name} subtitle={stage.description} />
         
-        <div ref="items" className="itemsContainer">
-          <Item itemName="Item 1" itemDescription="Some work" />
-          
-          <Item itemName="Item 2" itemDescription="Involves some lifting" />
-          
-          <Item itemName="Item 3" itemDescription="Can we make more of what time we have?" />
-          
-          <Item itemName="Item 4" itemDescription="An exceptional thing" />
-          
-          <Item itemName="Item 5" itemDescription="Newly contributed" />
-        </div>
+        {this.renderItems()}
       </Card>
     );
   }
 }
-
-StageComponent.defaultProps = {
-  items: []
-};
 
 export default StageComponent;

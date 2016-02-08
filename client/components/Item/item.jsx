@@ -5,19 +5,14 @@ import CardHeader from "material-ui/lib/card/card-header";
 
 class ItemComponent extends Component {
   render() {
-    var description = this.props.itemDescription;
-    var title = this.props.itemName;
+    var item = this.props.item;
 
     return (
       <Card className="itemCard gu-draggable">
-        <CardHeader title={title} subtitle={description} />
+        <CardHeader title={item.name} subtitle={item.description} />
       </Card>
     );
   }
 }
-
-ItemComponent.defaultProps = {
-  items: []
-};
 
 export default ItemComponent;

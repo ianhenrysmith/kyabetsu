@@ -11,6 +11,8 @@ import Stage from "../Stage/stage";
 import ReactDOM from "react-dom";
 import dragula from "react-dragula";
 
+import stagesStore from "../../stores/stagesStore";
+
 class IndexComponent extends Component {
   componentDidMount() {
     var items = []
@@ -34,16 +36,26 @@ class IndexComponent extends Component {
     dragula(items);
   }
 
+  renderStages() {
+    return (
+      <div className="stages">
+        {
+          _.map(stagesStore.getStages(), function(stage) {
+            return (
+              <Stage ref={`stage_${stage.shortname}`} stage={stage} />
+            )
+          })
+        }
+      </div>
+    )
+  }
+
   render() {
     return (
       <section id="stagesContainer">
         <AppBar title="Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar" />
 
-        <Stage ref="stage_idea" stageName="Idea" stageDescription="Just wondering..." />
-        <Stage ref="stage_design" stageName="Design" stageDescription="Work in progress" />
-        <Stage ref="stage_in_progress" stageName="In Progress" stageDescription="Make it happen people" />
-        <Stage ref="stage_acceptance" stageName="Acceptance" stageDescription="We're all just looking for acceptance" />
-        <Stage ref="stage_deployed" stageName="Deployed" stageDescription="It's real and it's fantastic" />
+        {this.renderStages()}
       </section>
     );
   }
