@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Card from 'material-ui/lib/card/card';
-import CardHeader from 'material-ui/lib/card/card-header';
+import Card from "material-ui/lib/card/card";
+import CardHeader from "material-ui/lib/card/card-header";
 
 class ItemComponent extends Component {
   render() {
@@ -9,7 +9,7 @@ class ItemComponent extends Component {
     var title = this.props.itemName;
 
     return (
-      <Card className="itemCard">
+      <Card className="itemCard gu-draggable">
         <CardHeader title={title} subtitle={description} />
       </Card>
     );
