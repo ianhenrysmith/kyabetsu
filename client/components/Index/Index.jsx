@@ -33,7 +33,11 @@ class IndexComponent extends Component {
       items.push(ReactDOM.findDOMNode(stage.refs.items));
     });
 
-    dragula(items);
+    dragula(items)
+      .on('drop', function (itemElement, targetContainer, sourceContainer) {
+        console.log(itemElement.getAttribute("data-item-id"), targetContainer.getAttribute("data-stage-id"))
+        return false;
+      });
   }
 
   renderStages() {

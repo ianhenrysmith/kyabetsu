@@ -8,7 +8,7 @@ class ItemComponent extends Component {
     var item = this.props.item;
 
     return (
-      <Card className="itemCard gu-draggable">
+      <Card className="itemCard gu-draggable" data-item-id={item.id}>
         <CardHeader title={item.name} subtitle={item.description} />
       </Card>
     );

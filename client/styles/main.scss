@@ -19,13 +19,21 @@ body {
   padding: 5px 0;
 }
 
-.stageCard {
+#stagesContainer {
+  min-width: 1200px;
+}
+
+.stageContainer {
   display: inline-block;
   height: 800px;
   margin: 20px 10px;
   width: calc(20% - 20px);
-}
+  position: relative;
 
-#stagesContainer {
-  min-width: 1200px;
+  .contentCount {
+    padding: 0;
+    position: absolute !important;
+    right: -10px;
+    top: -12px;
+  }
 }
