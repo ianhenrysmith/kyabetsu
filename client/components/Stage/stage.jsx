@@ -3,18 +3,36 @@ import Card from "material-ui/lib/card/card";
 import CardHeader from "material-ui/lib/card/card-header";
 import Badge from 'material-ui/lib/badge';
 
-import Item from "../Item/item";
-
-import itemsStore from "../../stores/itemsStore";
+// import Item from "../Item/item";
 
 class StageComponent extends Component {
+
   renderItems(stage, items) {
     return (
-      <div className="itemsList itemsContainer" ref="items" data-stage-id={stage.shortname}>
+      <div className="itemsContainer itemsList" data-stage-id={stage.shortname} ref="items">
         {
           _.map(items, function(item) {
             return (
-              <Item item={item} />
+              <Card className="itemCard gu-draggable" data-item-id={item.id}>
+                <CardHeader title={item.name} subtitle={item.description} />
+              </Card>
+
+              // <div className="itemCard gu-draggable" data-item-id="1">
+              //   <div className="inner">
+              //     <div title="Smoothies" className="itemTitle">
+              //       <div className="itemWrapper">
+              //         <span className="itemText">
+              //           {item.name}
+              //         </span>
+              //         <span className="itemSmallerText">
+              //           {item.description}
+              //         </span>
+              //       </div>
+              //     </div>
+              //   </div>
+              // </div>
+
+              // <p className="itemCard gu-draggable" data-item-id={item.id}>{item.name} - {item.description}</p>
             )
           })
         }
@@ -22,9 +40,17 @@ class StageComponent extends Component {
     )
   }
 
+  renderEmpty(stage) {
+    return (
+      <div className="itemsContainer itemsList" data-stage-id={stage.shortname} ref="items">
+        <p></p>
+      </div>
+    )
+  }
+
   render() {
     var stage = this.props.stage;
-    var items = itemsStore.getItemsForStageId(stage.shortname);
+    var items = this.props.items;
 
     return (
       <div className="stageContainer">
@@ -32,7 +58,7 @@ class StageComponent extends Component {
         <Card className="stageCard">
           <CardHeader title={stage.name} subtitle={stage.description} />
           
-          {this.renderItems(stage, items)}
+          { (_.size(items) > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }
         </Card>
       </div>
     );

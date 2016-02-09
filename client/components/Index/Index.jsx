@@ -1,52 +1,91 @@
-import React, { Component } from "react";
-import _ from "lodash"
-
-import injectTapEventPlugin from "react-tap-event-plugin";
-injectTapEventPlugin();
-
-import AppBar from "material-ui/lib/app-bar";
-
-import Stage from "../Stage/stage";
-
+import React from "react";
+import _ from "lodash";
 import ReactDOM from "react-dom";
-import dragula from "react-dragula";
+import injectTapEventPlugin from "react-tap-event-plugin";
+// import dragula from "react-dragula";
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
+import dispatcher from "../../flux/dispatcher";
+import constants from "../../flux/constants";
+
+import itemsStore from "../../stores/itemsStore";
 import stagesStore from "../../stores/stagesStore";
 
-class IndexComponent extends Component {
+import AppBar from "material-ui/lib/app-bar";
+import Stage from "../Stage/stage";
+
+injectTapEventPlugin();
+
+class IndexComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {items: itemsStore.getItems()};
+
+    this.updateItems = this.updateItems.bind(this);
+    this.setState = this.setState.bind(this);
+
+    itemsStore.addChangeListener(this.updateItems);
+  }
+
   componentDidMount() {
-    var items = []
+    this.setupDragging();
+  }
 
-    var stageNames = [
-      "stage_idea",
-      "stage_design",
-      "stage_in_progress",
-      "stage_acceptance",
-      "stage_deployed"
-    ]
+  componentWillUnmount() {
+    itemsStore.removeChangeListener(this.updateItems);
+  }
 
-    var index = this;
+  updateItems() {
+    this.setState({items: itemsStore.getItems()});
+  }
 
-    _.each(stageNames, function(stageName) {
-      var stage = index.refs[stageName];
+  setupDragging() {
+    // var items = []
 
-      items.push(ReactDOM.findDOMNode(stage.refs.items));
-    });
+    // var stageNames = [
+    //   "stage_idea",
+    //   "stage_design",
+    //   "stage_in_progress",
+    //   "stage_acceptance",
+    //   "stage_deployed"
+    // ]
 
-    dragula(items)
-      .on('drop', function (itemElement, targetContainer, sourceContainer) {
-        console.log(itemElement.getAttribute("data-item-id"), targetContainer.getAttribute("data-stage-id"))
-        return false;
-      });
+    // var index = this;
+
+    // _.each(stageNames, function(stageName) {
+    //   var stage = index.refs[stageName];
+
+    //   items.push(ReactDOM.findDOMNode(stage.refs.items));
+    // });
+
+    // dragula(items)
+    //   .on('drop', function (itemElement, targetContainer, sourceContainer) {
+    //     var itemId = itemElement.getAttribute("data-item-id");
+    //     var stageId = targetContainer.getAttribute("data-stage-id");
+
+    //     _.defer(function() {
+    //       dispatcher.handleAction({
+    //         actionType: constants.ITEM_DROPPED,
+    //         data: {itemId: itemId, stageId: stageId}
+    //       });
+    //     })
+    //   });
   }
 
   renderStages() {
+    var allItems = this.state.items;
+
     return (
       <div className="stages">
         {
           _.map(stagesStore.getStages(), function(stage) {
+            var stageItems = _.filter(allItems, function(item) {
+              return item.stage == stage.shortname;
+            });
+
             return (
-              <Stage ref={`stage_${stage.shortname}`} stage={stage} />
+              <Stage ref={`stage_${stage.shortname}`} stage={stage} items={stageItems} />
             )
           })
         }
@@ -63,10 +102,6 @@ class IndexComponent extends Component {
       </section>
     );
   }
-}
-
-IndexComponent.defaultProps = {
-  items: []
 };
 
 export default IndexComponent;

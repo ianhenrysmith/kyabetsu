@@ -7,10 +7,16 @@ class ItemComponent extends Component {
   render() {
     var item = this.props.item;
 
+    console.log("----", item)
+
     return (
-      <Card className="itemCard gu-draggable" data-item-id={item.id}>
-        <CardHeader title={item.name} subtitle={item.description} />
-      </Card>
+      // <Card className="itemCard gu-draggable" data-item-id={item.id}>
+      //   <CardHeader title={item.name} subtitle={item.description}></CardHeader>
+      // </Card>
+      // <p data-item-id={item.id}>{item.name}<span></span></p>
+      // <div data-item-id={item.id}>
+      //   <p>{item.name}</p>
+      // </div>
     );
   }
 }

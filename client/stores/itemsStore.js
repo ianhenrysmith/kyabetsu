@@ -13,6 +13,18 @@ var _items = [
   {id: "5", name: "Safety Dance", description: "You got Von Miller'd", stage: "deployed" }
 ];
 
+var getItemById = function(id) {
+  return _.find(_items, { id: id });
+};
+
+var moveItem = function(data) {
+  var item = getItemById(data.itemId);
+
+  if (item) {
+    item.stage = data.stageId;
+  }
+};
+
 var itemsStore = _.extend({}, baseStore, {
   getItems: function() {
     return _.cloneDeep(_items);
@@ -27,18 +39,18 @@ var itemsStore = _.extend({}, baseStore, {
   }
 });
 
-// dispatcher.register(function(payload) {
-//   var action = payload.action;
+dispatcher.register(function(payload) {
+  var action = payload.action;
 
-//   switch (action.actionType) {
-//     case constants.ALL_BUYING_STAGES_DATA_RECEIVED:
-//       setBuyingStages(action.data);
-//       itemsStore.emitChange();
-//       break;
+  switch (action.actionType) {
+    case constants.ITEM_DROPPED:
+      moveItem(action.data);
+      itemsStore.emitChange();
+      break;
 
-//     default:
-//       return true;
-//   }
-// });
+    default:
+      return true;
+  }
+});
 
 module.exports = itemsStore;
