@@ -16,6 +16,9 @@ var _stages = [
 var stagesStore = _.extend({}, baseStore, {
   getStages: function() {
     return _.cloneDeep(_stages);
+  },
+  getStage: function(id) {
+    return _.find(_stages, { shortname: id });
   }
 });
 
