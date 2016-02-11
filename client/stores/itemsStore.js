@@ -6,11 +6,11 @@ var constants = require("../flux/constants");
 var baseStore = require("./baseStore");
 
 var _items = [
-  {id: "1", name: "Smoothies", description: "Life is a grind", stage: "idea" },
-  {id: "2", name: "Defenestrate the Paupers", description: "Involves some heavy lifting", stage: "design" },
-  {id: "3", name: "Caribou", description: "Take a left at Manitoba", stage: "in_progress" },
-  {id: "4", name: "Fish Mongering", description: "You dare insult the son of a shepherd", stage: "acceptance" },
-  {id: "5", name: "Safety Dance", description: "You got Von Miller'd", stage: "deployed" }
+  {id: "1", name: "Smoothies", description: "Life is a grind", stage: "idea", tasks: [{id: "1", done: true, description: "Finish This Task"}] },
+  {id: "2", name: "Defenestrate the Paupers", description: "Involves some heavy lifting", stage: "design", tasks: [{id: "1", done: false, description: "Finish This Task"}] },
+  {id: "3", name: "Caribou", description: "Take a left at Manitoba", stage: "in_progress", tasks: [{id: "1", done: false, description: "Finish This Task"}] },
+  {id: "4", name: "Fish Mongering", description: "You dare insult the son of a shepherd", stage: "acceptance", tasks: [{id: "1", done: false, description: "Finish This Task"}] },
+  {id: "5", name: "Safety Dance", description: "You got Von Miller'd", stage: "deployed", tasks: [{id: "1", done: false, description: "Finish This Task"}] }
 ];
 
 var _draggingItemId;
