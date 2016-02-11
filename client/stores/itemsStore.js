@@ -40,6 +40,19 @@ var setStage = function(item, stageId) {
   });
 }
 
+var newItem = function(data) {
+  var item = {
+    id: _.random(6, 9999999) + "",
+    name: data.name,
+    description: data.description,
+    tasks: []
+  }
+
+  _items.push(item);
+
+  setStage(item, "idea");
+}
+
 var moveItem = function(data) {
   var item = getItemById(_draggingItemId);
 
@@ -75,6 +88,11 @@ dispatcher.register(function(payload) {
       setDraggingItem(action.data);
       break;
 
+    case constants.CONTENT_CREATED:
+      newItem(action.data);
+      itemsStore.emitChange();
+      break;
+ 
     default:
       return true;
   }
