@@ -61,6 +61,14 @@ var moveItem = function(data) {
   }
 };
 
+var taskCompletionChanged = function(data) {
+  var item = getItemById(data.itemId);
+
+  var task = _.find(item.tasks, { id: data.taskId });
+
+  task.done = data.done;
+}
+
 var itemsStore = _.extend({}, baseStore, {
   getItems: function() {
     return _.cloneDeep(_items);
@@ -92,7 +100,12 @@ dispatcher.register(function(payload) {
       newItem(action.data);
       itemsStore.emitChange();
       break;
- 
+
+    case constants.TASK_COMPLETION_CHANGED:
+      taskCompletionChanged(action.data);
+      itemsStore.emitChange();
+      break;
+
     default:
       return true;
   }

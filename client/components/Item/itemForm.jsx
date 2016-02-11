@@ -51,8 +51,8 @@ class ItemFormComponent extends Component {
 
     return (
       <div>
-        <TextField hintText="Item name" floatingLabelText="Name" onChange={this.nameChanged} defaultValue={name} /><br/>
-        <TextField hintText="Item description" floatingLabelText="Description" onChange={this.descriptionChanged} defaultValue={description} />
+        <TextField hintText="Content Title" floatingLabelText="Title" onChange={this.nameChanged} defaultValue={name} /><br/>
+        <TextField hintText="Content Body" floatingLabelText="Body" onChange={this.descriptionChanged} defaultValue={description} />
         {this.renderTasks(item, tasks)}
       </div>
     );
