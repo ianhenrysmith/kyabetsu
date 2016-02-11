@@ -69,20 +69,32 @@ class StageComponent extends Component {
     )
   }
 
+  renderCount(count) {
+    var isPrimary = count > 2;
+    var isSecondary = count > 0;
+
+    if (count) {
+      return (
+        <Badge badgeContent={count} primary={isPrimary} secondary={isSecondary} className="contentCount" />
+      );
+    }
+  }
+
   render() {
     var stage = this.props.stage;
     var items = this.props.items;
+    var size = _.size(items);
     const connectDropTarget = this.props.connectDropTarget;
     const isOver = this.props.isOver;
     const canDrop = this.props.canDrop;
 
     return connectDropTarget(
       <div className="stageContainer">
-        <Badge badgeContent={_.size(items)} primary={true} className="contentCount" />
+        { this.renderCount(size) }
         <Card className="stageCard">
           <CardHeader title={stage.name} subtitle={stage.description} />
           
-          { (_.size(items) > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }
+          { (size > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }
         </Card>
       </div>
     );
