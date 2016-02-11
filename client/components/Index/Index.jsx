@@ -2,12 +2,9 @@ import React from "react";
 import _ from "lodash";
 import ReactDOM from "react-dom";
 import injectTapEventPlugin from "react-tap-event-plugin";
-// import dragula from "react-dragula";
+
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
-import dispatcher from "../../flux/dispatcher";
-import constants from "../../flux/constants";
 
 import itemsStore from "../../stores/itemsStore";
 import stagesStore from "../../stores/stagesStore";
@@ -15,7 +12,6 @@ import stagesStore from "../../stores/stagesStore";
 import AppBar from "material-ui/lib/app-bar";
 import Stage from "../Stage/stage";
 
-injectTapEventPlugin();
 
 class IndexComponent extends React.Component {
   constructor(props) {
@@ -29,7 +25,7 @@ class IndexComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.setupDragging();
+    itemsStore.addChangeListener(this.updateItems);
   }
 
   componentWillUnmount() {
@@ -38,39 +34,6 @@ class IndexComponent extends React.Component {
 
   updateItems() {
     this.setState({items: itemsStore.getItems()});
-  }
-
-  setupDragging() {
-    // var items = []
-
-    // var stageNames = [
-    //   "stage_idea",
-    //   "stage_design",
-    //   "stage_in_progress",
-    //   "stage_acceptance",
-    //   "stage_deployed"
-    // ]
-
-    // var index = this;
-
-    // _.each(stageNames, function(stageName) {
-    //   var stage = index.refs[stageName];
-
-    //   items.push(ReactDOM.findDOMNode(stage.refs.items));
-    // });
-
-    // dragula(items)
-    //   .on('drop', function (itemElement, targetContainer, sourceContainer) {
-    //     var itemId = itemElement.getAttribute("data-item-id");
-    //     var stageId = targetContainer.getAttribute("data-stage-id");
-
-    //     _.defer(function() {
-    //       dispatcher.handleAction({
-    //         actionType: constants.ITEM_DROPPED,
-    //         data: {itemId: itemId, stageId: stageId}
-    //       });
-    //     })
-    //   });
   }
 
   renderStages() {
@@ -104,4 +67,4 @@ class IndexComponent extends React.Component {
   }
 };
 
-export default IndexComponent;
+export default DragDropContext(HTML5Backend)(IndexComponent);

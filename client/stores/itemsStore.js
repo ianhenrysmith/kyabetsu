@@ -13,12 +13,18 @@ var _items = [
   {id: "5", name: "Safety Dance", description: "You got Von Miller'd", stage: "deployed" }
 ];
 
+var _draggingItemId;
+
 var getItemById = function(id) {
   return _.find(_items, { id: id });
 };
 
+var setDraggingItem = function(data) {
+  _draggingItemId = data.itemId;
+};
+
 var moveItem = function(data) {
-  var item = getItemById(data.itemId);
+  var item = getItemById(_draggingItemId);
 
   if (item) {
     item.stage = data.stageId;
@@ -46,6 +52,10 @@ dispatcher.register(function(payload) {
     case constants.ITEM_DROPPED:
       moveItem(action.data);
       itemsStore.emitChange();
+      break;
+
+    case constants.ITEM_DRAG_STARTED:
+      setDraggingItem(action.data);
       break;
 
     default:

@@ -1,11 +1,51 @@
 import React, { Component } from "react";
 import Card from "material-ui/lib/card/card";
 import CardHeader from "material-ui/lib/card/card-header";
-import Badge from 'material-ui/lib/badge';
+import Badge from "material-ui/lib/badge";
 
-// import Item from "../Item/item";
+import dispatcher from "../../flux/dispatcher";
+import constants from "../../flux/constants";
+
+import Item from "../Item/item";
+
+import { DropTarget } from 'react-dnd';
+
+var stageTarget = {
+  canDrop: function (props) {
+    return true;
+  },
+
+  drop: function (props) {
+    dispatcher.handleAction({
+      actionType: constants.ITEM_DROPPED,
+      data: {stageId: props.stage.shortname}
+    });
+  }
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+  };
+}
 
 class StageComponent extends Component {
+  renderOverlay() {
+    return (
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: "yellow",
+      }} />
+    )
+  }
 
   renderItems(stage, items) {
     return (
@@ -13,26 +53,7 @@ class StageComponent extends Component {
         {
           _.map(items, function(item) {
             return (
-              <Card className="itemCard gu-draggable" data-item-id={item.id}>
-                <CardHeader title={item.name} subtitle={item.description} />
-              </Card>
-
-              // <div className="itemCard gu-draggable" data-item-id="1">
-              //   <div className="inner">
-              //     <div title="Smoothies" className="itemTitle">
-              //       <div className="itemWrapper">
-              //         <span className="itemText">
-              //           {item.name}
-              //         </span>
-              //         <span className="itemSmallerText">
-              //           {item.description}
-              //         </span>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </div>
-
-              // <p className="itemCard gu-draggable" data-item-id={item.id}>{item.name} - {item.description}</p>
+              <Item item={item} />
             )
           })
         }
@@ -51,8 +72,11 @@ class StageComponent extends Component {
   render() {
     var stage = this.props.stage;
     var items = this.props.items;
+    const connectDropTarget = this.props.connectDropTarget;
+    const isOver = this.props.isOver;
+    const canDrop = this.props.canDrop;
 
-    return (
+    return connectDropTarget(
       <div className="stageContainer">
         <Badge badgeContent={_.size(items)} primary={true} className="contentCount" />
         <Card className="stageCard">
@@ -65,4 +89,4 @@ class StageComponent extends Component {
   }
 }
 
-export default StageComponent;
+export default DropTarget("item", stageTarget, collect)(StageComponent);
