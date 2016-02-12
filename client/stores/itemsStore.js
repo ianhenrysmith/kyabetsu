@@ -21,7 +21,7 @@ var setDraggingItem = function(data) {
 var setStage = function(item, stageId) {
   var newStage = stagesStore.getStage(stageId);
 
-  if (item.stage) {
+  if (item.stage && item.stage != stageId) {
     var oldStage = stagesStore.getStage(item.stage);
 
     var activity = `Moved from ${oldStage.name} to ${newStage.name} after ${item.daysInStage} days.`
@@ -32,17 +32,17 @@ var setStage = function(item, stageId) {
   if (item.stage != stageId) {
     item.stage = stageId;
     item.daysInStage = 0;
+
+    _.each(newStage.tasks, function(task) {
+      var newTask = {
+        id: _.random(2, 9999999) + "",
+        description: task.description,
+        done: false
+      }
+
+      item.tasks.unshift(newTask);
+    });
   }
-
-  _.each(newStage.tasks, function(task) {
-    var newTask = {
-      id: _.random(2, 9999999) + "",
-      description: task.description,
-      done: false
-    }
-
-    item.tasks.unshift(newTask);
-  });
 }
 
 var newItem = function(data) {
@@ -64,8 +64,14 @@ var moveItem = function(data) {
   var item = getItemById(_draggingItemId);
 
   if (item) {
-    item.lane = data.lane;
+    if (item.stage == data.stageId && item.lane != data.lane) {
+      var activity = `Priority changed from ${item.lane} to ${data.lane} by Ian.`
+
+      item.activity.unshift(activity);
+    }
+    
     setStage(item, data.stageId);
+    item.lane = data.lane;
   }
 };
 

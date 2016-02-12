@@ -72,6 +72,13 @@ body {
   width: calc(20% - 20px);
 }
 
+.stageHeader {
+  text-align: center;
+  span:first-child {
+    font-size: 22px !important;
+  }
+}
+
 .stageContainer {
   display: inline-block;
   height: 350px;

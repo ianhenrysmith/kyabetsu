@@ -72,7 +72,7 @@ class StageLaneComponent extends Component {
   renderHeader(stage, lane) {
     if (lane == 0) {
       return (
-        <CardHeader title={stage.name} subtitle={stage.description} />
+        <CardHeader title={stage.name} subtitle={stage.description} className="stageHeader" />
       )
     }
   }
