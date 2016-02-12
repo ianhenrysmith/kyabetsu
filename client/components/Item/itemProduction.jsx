@@ -9,7 +9,7 @@ class ItemProductionComponent extends Component {
           {
             _.map(item.activity, function(activity) {
               return (
-                <li>{activity}</li>
+                <li key={"activity_" + item.id + _.random(0, 88888)}>{activity}</li>
               )
             })
           }
@@ -24,8 +24,8 @@ class ItemProductionComponent extends Component {
     var stage = this.props.stage;
 
     return (
-      <div>
-        <p>In {stage.name} for {daysInStage} days.</p>
+      <div style={{margin: "20px"}}>
+        <p style={{fontSize: "20px", marginBottom: "20px"}}>In {stage.name} for {daysInStage} days.</p>
 
         {this.renderActivity(item)}
       </div>

@@ -42,7 +42,7 @@ class StageLaneComponent extends Component {
         {
           _.map(items, function(item) {
             return (
-              <Item item={item} stage={stage} />
+              <Item key={"item_" + item.id + stage.shortname} item={item} stage={stage} />
             )
           })
         }

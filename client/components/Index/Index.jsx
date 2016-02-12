@@ -84,7 +84,7 @@ class IndexComponent extends React.Component {
             });
 
             return (
-              <Stage ref={`stage_${stage.shortname}`} stage={stage} items={stageItems} />
+              <Stage key={"stage_" + stage.shortname} ref={`stage_${stage.shortname}`} stage={stage} items={stageItems} />
             )
           })
         }

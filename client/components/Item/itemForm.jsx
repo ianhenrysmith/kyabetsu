@@ -35,7 +35,7 @@ class ItemFormComponent extends Component {
         {
           _.map(tasks, function(task) {
             return (
-              <Task task={task} itemId={item.id} />
+              <Task key={"task_" + task.id + item.id} task={task} itemId={item.id} />
             )
           })
         }
