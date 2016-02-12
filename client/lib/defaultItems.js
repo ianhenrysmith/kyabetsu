@@ -11,7 +11,7 @@ var items = [
   },
   {
     id: "2",
-    name: "Shout outs",
+    name: "Watch ET 👽",
     daysInStage: 2,
     lane: 1,
     activity: ["Created by Ian for a hackathon."],
@@ -33,7 +33,7 @@ var items = [
     id: "4",
     name: "Connect with Rolf",
     daysInStage: 4,
-    lane: 0,
+    lane: 1,
     activity: ["Created by Ian for a hackathon."],
     description: "You dare insult the son of a shepherd",
     stage: "acceptance",
@@ -56,28 +56,48 @@ var items = [
     lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "Where is he?",
-    stage: "design",
+    stage: "acceptance",
     tasks: [{id: "1", done: false, description: "Get the map"}]
   },
   {
     id: "7",
-    name: "Canned Content",
+    name: "Block some shots",
     daysInStage: 1,
     lane: 0,
     activity: ["Created by Ian for a hackathon."],
-    description: "Never",
+    description: "Shout out to Dikembe",
     stage: "idea",
     tasks: [{id: "1", done: false, description: "Get the map"}]
   },
   {
     id: "8",
-    name: "Publish some funny tweets",
+    name: "Create the content",
     daysInStage: 1,
     lane: 0,
     activity: ["Created by Ian for a hackathon."],
-    description: "Tweets are forever",
+    description: "Tweets are forever 👌",
     stage: "design",
     tasks: [{id: "1", done: false, description: "Get the map"}]
+  },
+  {
+    id: "9",
+    name: "Calisthenics",
+    daysInStage: 9,
+    lane: 2,
+    activity: ["Created by Ian for a hackathon."],
+    description: "Calisthenics are kinda dumb",
+    stage: "idea",
+    tasks: [{id: "1", done: false, description: "Do some jumping jacks plz"}]
+  },
+  {
+    id: "10",
+    name: "Hackathon 🤖",
+    daysInStage: 0,
+    lane: 0,
+    activity: ["Created by Ian for a hackathon."],
+    description: "Hackathons are fun",
+    stage: "acceptance",
+    tasks: [{id: "1", done: false, description: "Just write some code"}]
   }
 ]
 
