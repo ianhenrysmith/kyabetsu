@@ -48,7 +48,8 @@ class ItemComponent extends Component {
     this.openSettings = this.openSettings.bind(this);
   }
 
-  handleOpen() {
+  handleOpen(event) {
+    event.stopPropagation();
     this.setState({open: true});
   }
 
