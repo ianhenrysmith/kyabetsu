@@ -19,14 +19,37 @@ class ItemFormComponent extends Component {
 
     this.setState = this.setState.bind(this);
     this.nameChanged = this.nameChanged.bind(this);
+    this.descriptionChanged = this.descriptionChanged.bind(this);
+    this.updateContent = this.updateContent.bind(this);
   }
 
   nameChanged(event) {
+    var name = event.target.value;
     this.setState({name: event.target.value});
+
+    this.updateContent({name: name});
   }
 
   descriptionChanged(event) {
-    this.setState({description: event.target.value});
+    var description = event.target.value;
+    this.setState({description: description});
+
+    this.updateContent({description: description});
+  }
+
+  updateContent(data) {
+    var defaultData = {
+      id: this.props.item.id,
+      description: this.state.description,
+      name: this.state.name
+    }
+
+    var contentData = _.extend(defaultData, data)
+
+    dispatcher.handleAction({
+      actionType: constants.CONTENT_UPDATED,
+      data: contentData
+    });
   }
 
   renderTasks(item, tasks) {

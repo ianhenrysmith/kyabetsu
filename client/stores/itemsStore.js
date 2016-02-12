@@ -18,6 +18,13 @@ var setDraggingItem = function(data) {
   _draggingItemId = data.itemId;
 };
 
+var updateItem = function(data) {
+  var item = getItemById(data.id)
+
+  item.name = data.name
+  item.description = data.description
+}
+
 var setStage = function(item, stageId) {
   var newStage = stagesStore.getStage(stageId);
 
@@ -116,6 +123,11 @@ dispatcher.register(function(payload) {
 
     case constants.CONTENT_CREATED:
       newItem(action.data);
+      itemsStore.emitChange();
+      break;
+
+    case constants.CONTENT_UPDATED:
+      updateItem(action.data);
       itemsStore.emitChange();
       break;
 

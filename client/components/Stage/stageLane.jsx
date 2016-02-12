@@ -89,7 +89,7 @@ class StageLaneComponent extends Component {
     var size = _.size(items);
     var lane = this.props.lane;
     var limit = this.props.limit;
-    var containerClasses = (lane > 0) ? "stageContainer notTop" : "stageContainer";
+    var containerClasses = (lane > 0) ? `stageContainer notTop stage_${stage.shortname}` : `stageContainer top stage_${stage.shortname}`;
     var stageClasses = "stageCard";
 
     if (lane == 1) {

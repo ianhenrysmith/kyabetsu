@@ -75,7 +75,7 @@ body {
 }
 
 .kindaLate {
-  border-top: 5px solid yellow;
+  border-top: 5px solid #FFDD00;
   margin-top: 5px;
 }
 
@@ -109,7 +109,7 @@ body {
 }
 
 .veryLate {
-  border-top: 5px solid red;
+  border-top: 5px solid #FF4E00;
   margin-top: 5px;
 }
 
@@ -122,16 +122,16 @@ body {
 
 .stageCard {
   .itemsContainer {
-    background: #f0f0f0;
+    background: #efefef;
   }
   &.middle {
     .itemsContainer {
-      background: #f8f8f8;
+      background: #fafafa;
     }
   }
   &.bottom {
     .itemsContainer {
-      background: #f0f0f0;
+      background: #efefef;
     }
   }
 }
@@ -164,6 +164,21 @@ body {
     .stageCard, .itemsContainer {
       height: 100%;
     }
+  }
+  &.stage_idea .stageHeader {
+    border-bottom: 3px solid #FFFFFF;
+  }
+  &.stage_design .stageHeader {
+    border-bottom: 3px solid #CFCFCF;
+  }
+  &.stage_in_progress .stageHeader {
+    border-bottom: 3px solid #A1A1A1;
+  }
+  &.stage_acceptance .stageHeader {
+    border-bottom: 3px solid #797979;
+  }
+  &.stage_deployed .stageHeader {
+    border-bottom: 3px solid #348700;
   }
 
   .contentCount {

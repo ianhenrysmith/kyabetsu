@@ -76,7 +76,7 @@ class ItemComponent extends Component {
     }
   }
 
-  renderHeader(item) {
+  renderCard(item) {
     var lateClasses = "";
     var tasksCount = item.tasks.length;
     var completedTasksCount = _.size(_.filter(item.tasks, { done: true }))
@@ -90,7 +90,7 @@ class ItemComponent extends Component {
     }
 
     return (
-      <Card className={`itemCard gu-draggable ${lateClasses}`} data-item-id={item.id} onClick={this.handleOpen}>
+      <Card zDepth={1} className={`itemCard gu-draggable ${lateClasses}`} data-item-id={item.id} onClick={this.handleOpen}>
         <CardHeader title={item.name} subtitle={item.description}></CardHeader>
         {this.renderTaskCompletion(completedTasksCount, tasksCount)}
       </Card>
@@ -108,7 +108,7 @@ class ItemComponent extends Component {
 
     return connectDragSource(
       <div>
-        {this.renderHeader(item)}
+        {this.renderCard(item)}
 
         <Dialog
           modal={false}

@@ -13,7 +13,7 @@ var items = [
     id: "2",
     name: "Watch ET 👽",
     daysInStage: 2,
-    lane: 1,
+    lane: 2,
     activity: ["Created by Ian for a hackathon."],
     description: "Involves some heavy lifting",
     stage: "idea",
