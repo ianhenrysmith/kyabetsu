@@ -107,31 +107,33 @@ class IndexComponent extends React.Component {
 
   renderCreate() {
     return (
-      <Toolbar>
-        <ToolbarGroup firstChild={true} float="left">
-          <RaisedButton label="✨ Create Content" primary={true} onClick={this.handleNewContent} />
-          <Popover
-            open={this.state.open}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-            onRequestClose={this.handleRequestClose}
-          >
-            <Card style={{padding: "20px"}}>
-              <TextField hintText="Title" floatingLabelText="Title" ref="newContentName" /><br/>
-              <TextField hintText="Body" floatingLabelText="Body" ref="newContentDescription" /><br/>
-              <RaisedButton primary={true} label="Create" onClick={this.createContent} />
-            </Card>
-          </Popover>
-        </ToolbarGroup>
-      </Toolbar>
+      <div>
+        <Popover
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          onRequestClose={this.handleRequestClose}
+        >
+          <Card style={{padding: "20px"}}>
+            <TextField hintText="Title" floatingLabelText="Title" ref="newContentName" /><br/>
+            <TextField hintText="Body" floatingLabelText="Body" ref="newContentDescription" /><br/>
+            <RaisedButton primary={true} label="Create" onClick={this.createContent} />
+          </Card>
+        </Popover>
+      </div>
     );
   }
 
   render() {
     return (
+      // キャベツ
       <section id="stagesContainer">
-        <AppBar title="Kanban 🍏 キャベツ" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar" />
+        <AppBar title="🍏 Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar">
+          <div className="createContentButton">
+            <RaisedButton label="✨ Create Content" primary={true} onClick={this.handleNewContent} />
+          </div>
+        </AppBar>
 
         {this.renderCreate()}
 
