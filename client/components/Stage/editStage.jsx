@@ -28,13 +28,22 @@ class EditStageComponent extends Component {
     )
   }
 
+  renderNoTasks() {
+    return (
+      <div>
+        <p>Workflow</p><br/>
+        <p>This stage has no tasks.</p>
+      </div>
+    )
+  }
+
   render() {
     var stage = this.props.stage;
 
     return (
       <div>
         <CardHeader title={stage.name} subtitle={stage.description} className="stageHeader" />
-        {this.renderTasks(stage)}
+        {stage.tasks.length > 0 ? this.renderTasks(stage) : this.renderNoTasks()}
       </div>
     )
   }
