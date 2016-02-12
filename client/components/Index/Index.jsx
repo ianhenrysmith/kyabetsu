@@ -25,27 +25,39 @@ import Stage from "../Stage/stage";
 class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {items: itemsStore.getItems(), open: false};
+    this.state = {
+      items: itemsStore.getItems(),
+      stages: stagesStore.getStages(),
+      open: false
+    };
 
     this.updateItems = this.updateItems.bind(this);
+    this.updateStages = this.updateStages.bind(this);
     this.setState = this.setState.bind(this);
     this.handleNewContent = this.handleNewContent.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.createContent = this.createContent.bind(this);
 
     itemsStore.addChangeListener(this.updateItems);
+    stagesStore.addChangeListener(this.updateStages);
   }
 
   componentDidMount() {
     itemsStore.addChangeListener(this.updateItems);
+    stagesStore.addChangeListener(this.updateStages);
   }
 
   componentWillUnmount() {
     itemsStore.removeChangeListener(this.updateItems);
+    stagesStore.removeChangeListener(this.updateStages);
   }
 
   updateItems() {
     this.setState({items: itemsStore.getItems()});
+  }
+
+  updateStages() {
+    this.setState({stages: stagesStore.getStages()}); 
   }
 
   handleNewContent(event) {
@@ -73,12 +85,13 @@ class IndexComponent extends React.Component {
   }
 
   renderStages() {
+    var stages = this.state.stages;
     var allItems = this.state.items;
 
     return (
       <div className="stages">
         {
-          _.map(stagesStore.getStages(), function(stage) {
+          _.map(stages, function(stage) {
             var stageItems = _.filter(allItems, function(item) {
               return item.stage == stage.shortname;
             });

@@ -13,12 +13,33 @@ var _stages = [
   {name: "Deployed", description: "That thing's operational", shortname: "deployed", tasks: []},
 ];
 
+var addTask = function(data) {
+  var stage = stagesStore.getStage(data.stageId);
+
+  var task = { description: data.description };
+
+  stage.tasks.push(task);
+}
+
 var stagesStore = _.extend({}, baseStore, {
   getStages: function() {
     return _.cloneDeep(_stages);
   },
   getStage: function(id) {
     return _.find(_stages, { shortname: id });
+  }
+});
+
+dispatcher.register(function(payload) {
+  var action = payload.action;
+
+  switch (action.actionType) {
+    case constants.TASK_CREATED:
+      addTask(action.data);
+      stagesStore.emitChange();
+      break;
+    default:
+      return true;
   }
 });
 

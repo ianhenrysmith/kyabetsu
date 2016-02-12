@@ -11,6 +11,8 @@ import CardHeader from "material-ui/lib/card/card-header";
 import Checkbox from "material-ui/lib/checkbox";
 import ListItem from "material-ui/lib/lists/list-item";
 
+import TaskCreation from "./taskCreation";
+
 class EditStageComponent extends Component {
   renderTasks(stage) {
     var tasks = stage.tasks;
@@ -37,12 +39,19 @@ class EditStageComponent extends Component {
     )
   }
 
+  renderTaskButton(stage) {
+    return (
+      <TaskCreation stage={stage} />
+    )
+  }
+
   render() {
     var stage = this.props.stage;
 
     return (
       <div>
         <CardHeader title={stage.name} subtitle={stage.description} className="stageHeader" />
+        {this.renderTaskButton(stage)}
         {stage.tasks.length > 0 ? this.renderTasks(stage) : this.renderNoTasks()}
       </div>
     )
