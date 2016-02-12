@@ -52,7 +52,7 @@ class TaskCreationComponent extends React.Component {
 
     return (
       <div ref="creationContainer" data-stage-id={stage.shortname}>
-        <RaisedButton label="Create Task" primary={true} onClick={this.handleNewTask} />
+        <RaisedButton label="✨ Create Task" primary={true} onClick={this.handleNewTask} />
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}

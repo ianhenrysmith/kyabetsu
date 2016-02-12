@@ -109,7 +109,7 @@ class IndexComponent extends React.Component {
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true} float="left">
-          <RaisedButton label="Create Content" primary={true} onClick={this.handleNewContent} />
+          <RaisedButton label="✨ Create Content" primary={true} onClick={this.handleNewContent} />
           <Popover
             open={this.state.open}
             anchorEl={this.state.anchorEl}
@@ -131,7 +131,7 @@ class IndexComponent extends React.Component {
   render() {
     return (
       <section id="stagesContainer">
-        <AppBar title="Kanban" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar" />
+        <AppBar title="Kanban 🍏 キャベツ" iconClassNameRight="muidocs-icon-navigation-expand-more" id="appBar" />
 
         {this.renderCreate()}
 
