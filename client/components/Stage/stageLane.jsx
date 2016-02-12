@@ -58,8 +58,8 @@ class StageLaneComponent extends Component {
     )
   }
 
-  renderCount(count, limit) {
-    var isPrimary = count > limit;
+  renderCount(stage, count, limit) {
+    var isPrimary = stage.shortname != "deployed" && stage.shortname != "idea" && count > limit;
     var isSecondary = count > 0;
 
     if (count) {
@@ -88,7 +88,7 @@ class StageLaneComponent extends Component {
 
     return connectDropTarget(
       <div className={containerClasses}>
-        { this.renderCount(size, limit) }
+        { this.renderCount(stage, size, limit) }
         <Card className="stageCard">
           { this.renderHeader(stage, lane) }
           { (size > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }

@@ -5,60 +5,9 @@ var constants = require("../flux/constants");
 
 var baseStore = require("./baseStore");
 var stagesStore = require("./stagesStore");
+var defaultItems = require("../lib/defaultItems")
 
-var _items = [
-  {
-    id: "1",
-    name: "Smoothies",
-    daysInStage: 2,
-    lane: 0,
-    activity: ["Created by Ian for a hackathon."],
-    description: "Life is a grind",
-    stage: "idea",
-    tasks: [{id: "1", done: true, description: "Finish This Task"}]
-  },
-  {
-    id: "2",
-    name: "Defenestrate the Paupers",
-    daysInStage: 2,
-    lane: 0,
-    activity: ["Created by Ian for a hackathon."],
-    description: "Involves some heavy lifting",
-    stage: "design",
-    tasks: [{id: "1", done: true, description: "Finish This Task"}]
-  },
-  {
-    id: "3",
-    name: "Caribou",
-    daysInStage: 7,
-    lane: 0,
-    activity: ["Created by Ian for a hackathon."],
-    description: "Take a left at Manitoba",
-    stage: "in_progress",
-    tasks: [{id: "1", done: true, description: "Finish This Task"}]
-  },
-  {
-    id: "4",
-    name: "Fish Mongering",
-    daysInStage: 4,
-    lane: 0,
-    activity: ["Created by Ian for a hackathon."],
-    description: "You dare insult the son of a shepherd",
-    stage: "acceptance",
-    tasks: [{id: "1", done: true, description: "Finish This Task"}]
-  },
-  {
-    id: "5",
-    name: "Safety Dance",
-    daysInStage: 0,
-    lane: 0,
-    activity: ["Created by Ian for a hackathon."],
-    description: "You got Von Miller'd",
-    stage: "deployed",
-    tasks: [{id: "1", done: true, description: "Finish This Task"}]
-  }
-];
-
+var _items = _.cloneDeep(defaultItems);
 var _draggingItemId;
 
 var getItemById = function(id) {
@@ -80,8 +29,10 @@ var setStage = function(item, stageId) {
     item.activity.unshift(activity);
   }
 
-  item.stage = stageId;
-  item.daysInStage = 0;
+  if (item.stage != stageId) {
+    item.stage = stageId;
+    item.daysInStage = 0;
+  }
 
   _.each(newStage.tasks, function(task) {
     var newTask = {
