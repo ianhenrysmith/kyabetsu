@@ -8,6 +8,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import itemsStore from "../../stores/itemsStore";
 import stagesStore from "../../stores/stagesStore";
+import messagesStore from "../../stores/messagesStore";
 
 import dispatcher from "../../flux/dispatcher";
 import constants from "../../flux/constants";
@@ -19,6 +20,7 @@ import RaisedButton from "material-ui/lib/raised-button";
 import Popover from "material-ui/lib/popover/popover";
 import Card from "material-ui/lib/card/card";
 import TextField from "material-ui/lib/text-field";
+import Snackbar from "material-ui/lib/snackbar";
 
 import Stage from "../Stage/stage";
 
@@ -28,28 +30,35 @@ class IndexComponent extends React.Component {
     this.state = {
       items: itemsStore.getItems(),
       stages: stagesStore.getStages(),
-      open: false
+      open: false,
+      messageOpen: false,
+      message: "Something happened"
     };
 
     this.updateItems = this.updateItems.bind(this);
     this.updateStages = this.updateStages.bind(this);
+    this.updateMessage = this.updateMessage.bind(this);
     this.setState = this.setState.bind(this);
     this.handleNewContent = this.handleNewContent.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.handleMessageClose = this.handleMessageClose.bind(this);
     this.createContent = this.createContent.bind(this);
 
     itemsStore.addChangeListener(this.updateItems);
     stagesStore.addChangeListener(this.updateStages);
+    messagesStore.addChangeListener(this.updateMessage);
   }
 
   componentDidMount() {
     itemsStore.addChangeListener(this.updateItems);
     stagesStore.addChangeListener(this.updateStages);
+    messagesStore.addChangeListener(this.updateMessage);
   }
 
   componentWillUnmount() {
     itemsStore.removeChangeListener(this.updateItems);
     stagesStore.removeChangeListener(this.updateStages);
+    messagesStore.removeChangeListener(this.updateMessage);
   }
 
   updateItems() {
@@ -60,6 +69,11 @@ class IndexComponent extends React.Component {
     this.setState({stages: stagesStore.getStages()}); 
   }
 
+  updateMessage() {
+    var message = messagesStore.getMessage();
+    this.setState({messageOpen: true, message: message}); 
+  }
+
   handleNewContent(event) {
     this.setState({open: true, anchorEl: event.currentTarget});
   }
@@ -68,6 +82,10 @@ class IndexComponent extends React.Component {
     this.setState({
       open: false
     });
+  }
+
+  handleMessageClose() {
+    this.setState({ messageOpen: false });
   }
 
   createContent() {
@@ -125,6 +143,17 @@ class IndexComponent extends React.Component {
     );
   }
 
+  renderNotifications() {
+    return (
+      <Snackbar
+        open={this.state.messageOpen}
+        message={this.state.message}
+        autoHideDuration={4000}
+        onRequestClose={this.handleMessageClose}
+        style={{textAlign: "center", opacity: 0.7}} />
+    )
+  }
+
   render() {
     return (
       // キャベツ
@@ -138,6 +167,7 @@ class IndexComponent extends React.Component {
         {this.renderCreate()}
 
         {this.renderStages()}
+        {this.renderNotifications()}
       </section>
     );
   }
