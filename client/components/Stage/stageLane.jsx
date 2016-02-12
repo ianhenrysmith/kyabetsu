@@ -89,13 +89,23 @@ class StageLaneComponent extends Component {
     var size = _.size(items);
     var lane = this.props.lane;
     var limit = this.props.limit;
-    var containerClasses = (lane > 0) ? "stageContainer notTop" : "stageContainer"
+    var containerClasses = (lane > 0) ? "stageContainer notTop" : "stageContainer";
+    var stageClasses = "stageCard";
+
+    if (lane == 1) {
+      stageClasses = "stageCard middle"
+    }
+
+    if (lane == 2) {
+      stageClasses = "stageCard bottom"
+    }
+
     const connectDropTarget = this.props.connectDropTarget;
 
     return connectDropTarget(
       <div className={containerClasses}>
         { this.renderCount(stage, size, limit) }
-        <Card className="stageCard">
+        <Card className={stageClasses}>
           { this.renderHeader(stage, lane) }
           { (size > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }
           { this.renderLane(stage, lane) }
