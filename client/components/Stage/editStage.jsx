@@ -16,9 +16,9 @@ import TaskCreation from "./taskCreation";
 class EditStageComponent extends Component {
   renderTasks(stage) {
     var tasks = stage.tasks;
-
+    
     return (
-      <List subheader="Workflow" className="itemTasksContainer tasksList" data-item-id={stage.shortname} ref="tasks">
+      <List subheader="WORKFLOW:" className="blockTitle itemTasksContainer tasksList" data-item-id={stage.shortname} ref="tasks">
         {
           _.map(tasks, function(task) {
             return (
@@ -33,7 +33,7 @@ class EditStageComponent extends Component {
   renderNoTasks() {
     return (
       <div>
-        <p>Workflow</p><br/>
+        <p className="blockTitle">WORKFLOW:</p><br/>
         <p>This stage has no tasks.</p>
       </div>
     )

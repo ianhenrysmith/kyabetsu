@@ -77,6 +77,12 @@ class StageLaneComponent extends Component {
     }
   }
 
+  renderLane(stage, lane) {
+    if (stage.shortname == "idea") {
+      return <div className="laneNumber">{lane}</div>
+    }
+  }
+
   render() {
     var stage = this.props.stage;
     var items = this.props.items;
@@ -92,6 +98,7 @@ class StageLaneComponent extends Component {
         <Card className="stageCard">
           { this.renderHeader(stage, lane) }
           { (size > 0) ? this.renderItems(stage, items) : this.renderEmpty(stage) }
+          { this.renderLane(stage, lane) }
         </Card>
       </div>
     );

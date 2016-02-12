@@ -7,6 +7,15 @@ body {
   background-color: rgb(66, 89, 109) !important;
 }
 
+.blockTitle {
+  margin-top: 20px;
+  color: #999;
+  div:first-child, &p {
+    font-size: 14px !important;
+    font-weight: bold !important;
+  }
+}
+
 .createContentButton {
   left: 200px;
   position: absolute;
@@ -49,6 +58,16 @@ body {
     display: block;
     font-size: 14px;
   }
+}
+
+.laneNumber {
+  font-size: 300px;
+  margin-top: 40px;
+  opacity: 0.05;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
 }
 
 .kindaLate {
