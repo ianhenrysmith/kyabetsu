@@ -12,6 +12,7 @@ import Tab from "material-ui/lib/tabs/tab";
 
 import ItemForm from "./itemForm";
 import ItemProduction from "./itemProduction";
+import TaskTooltip from "./taskTooltip";
 
 import { DragSource } from "react-dnd";
 
@@ -70,17 +71,9 @@ class ItemComponent extends Component {
   }
 
   renderTaskCompletion(doneCount, totalCount) {
-    var result = null;
-
     if (totalCount) {
-      if (doneCount < totalCount) {
-        result = <p className="taskCompletion">({doneCount} / {totalCount})</p>
-      } else {
-        result = <p className="taskCompletion">✅</p>
-      }
+      return <TaskTooltip doneCount={doneCount} totalCount={totalCount}/>
     }
-
-    return result;
   }
 
   renderHeader(item) {

@@ -67,6 +67,24 @@ body {
   top: 8px;
 }
 
+.tooltipContainer {
+  position: relative;
+}
+.taskTooltip {
+  background: black;
+  color: white;
+  left: -74px;
+  position: absolute;
+  text-align: center;
+  padding: 5px;
+  &.closed {
+    display: none;
+  }
+  &.done {
+    left: -40px;
+  }
+}
+
 .veryLate {
   border-top: 5px solid red;
   margin-top: 5px;
