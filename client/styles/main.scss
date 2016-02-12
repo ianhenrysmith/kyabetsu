@@ -80,6 +80,9 @@ body {
 
   &.notTop {
     margin-top: 30px;
+    .stageCard, .itemsContainer {
+      height: 100%;
+    }
   }
 
   .contentCount {
