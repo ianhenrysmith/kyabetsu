@@ -6,7 +6,7 @@ import constants from "../../flux/constants";
 import Checkbox from "material-ui/lib/checkbox";
 import ListItem from "material-ui/lib/lists/list-item";
 
-class ItemFormComponent extends Component {
+class TaskComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -42,4 +42,4 @@ class ItemFormComponent extends Component {
   }
 }
 
-export default ItemFormComponent;
+export default TaskComponent;

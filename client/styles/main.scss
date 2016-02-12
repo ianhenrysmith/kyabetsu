@@ -66,12 +66,21 @@ body {
   min-width: 1200px;
 }
 
-.stageContainer {
+.stagesContainer {
   display: inline-block;
-  height: 800px;
   margin: 20px 10px;
   width: calc(20% - 20px);
+}
+
+.stageContainer {
+  display: inline-block;
+  height: 350px;
+  width: 100%;
   position: relative;
+
+  &.notTop {
+    margin-top: 30px;
+  }
 
   .contentCount {
     padding: 0;

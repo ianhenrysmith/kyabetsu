@@ -11,6 +11,7 @@ var _items = [
     id: "1",
     name: "Smoothies",
     daysInStage: 2,
+    lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "Life is a grind",
     stage: "idea",
@@ -20,6 +21,7 @@ var _items = [
     id: "2",
     name: "Defenestrate the Paupers",
     daysInStage: 2,
+    lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "Involves some heavy lifting",
     stage: "design",
@@ -29,6 +31,7 @@ var _items = [
     id: "3",
     name: "Caribou",
     daysInStage: 7,
+    lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "Take a left at Manitoba",
     stage: "in_progress",
@@ -38,6 +41,7 @@ var _items = [
     id: "4",
     name: "Fish Mongering",
     daysInStage: 4,
+    lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "You dare insult the son of a shepherd",
     stage: "acceptance",
@@ -47,6 +51,7 @@ var _items = [
     id: "5",
     name: "Safety Dance",
     daysInStage: 0,
+    lane: 0,
     activity: ["Created by Ian for a hackathon."],
     description: "You got Von Miller'd",
     stage: "deployed",
@@ -95,7 +100,8 @@ var newItem = function(data) {
     name: data.name,
     description: data.description,
     tasks: [],
-    activity: ["Created by Ian on Feb 12"]
+    activity: ["Created by Ian on Feb 12"],
+    lane: 0
   }
 
   _items.push(item);
@@ -107,6 +113,7 @@ var moveItem = function(data) {
   var item = getItemById(_draggingItemId);
 
   if (item) {
+    item.lane = data.lane;
     setStage(item, data.stageId);
   }
 };
