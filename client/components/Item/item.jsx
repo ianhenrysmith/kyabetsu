@@ -69,14 +69,24 @@ class ItemComponent extends Component {
     });
   }
 
-  render() {
-    var item = this.props.item;
-    var openSettings = this.openSettings;
-    var openProduction = this.openProduction;
-    var tab = this.state.value;
+  renderTaskCompletion(doneCount, totalCount) {
+    var result = null;
+
+    if (totalCount) {
+      if (doneCount < totalCount) {
+        result = <p className="taskCompletion">({doneCount} / {totalCount})</p>
+      } else {
+        result = <p className="taskCompletion">✅</p>
+      }
+    }
+
+    return result;
+  }
+
+  renderHeader(item) {
     var lateClasses = "";
-    const connectDragSource = this.props.connectDragSource
-    const isDragging = this.props.isDragging;
+    var tasksCount = item.tasks.length;
+    var completedTasksCount = _.size(_.filter(item.tasks, { done: true }))
 
     if (item.daysInStage > 2) {
       lateClasses = "kindaLate";
@@ -86,11 +96,26 @@ class ItemComponent extends Component {
       }
     }
 
+    return (
+      <Card className={`itemCard gu-draggable ${lateClasses}`} data-item-id={item.id} onClick={this.handleOpen}>
+        <CardHeader title={item.name} subtitle={item.description}></CardHeader>
+        {this.renderTaskCompletion(completedTasksCount, tasksCount)}
+      </Card>
+    )
+  }
+
+  render() {
+    var item = this.props.item;
+    var openSettings = this.openSettings;
+    var openProduction = this.openProduction;
+    var tab = this.state.value;
+    
+    const connectDragSource = this.props.connectDragSource
+    const isDragging = this.props.isDragging;
+
     return connectDragSource(
       <div>
-        <Card className={`itemCard gu-draggable ${lateClasses}`} data-item-id={item.id} onClick={this.handleOpen}>
-          <CardHeader title={item.name} subtitle={item.description}></CardHeader>
-        </Card>
+        {this.renderHeader(item)}
 
         <Dialog
           modal={false}

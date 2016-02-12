@@ -22,6 +22,7 @@ body {
   box-shadow:0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
   border-radius:2px;
   overflow: hidden;
+  position: relative;
   z-index:1;
 
   .inner {
@@ -53,6 +54,17 @@ body {
 .kindaLate {
   border-top: 5px solid yellow;
   margin-top: 5px;
+}
+
+.taskCompletion {
+  font-size: 12px;
+  letter-spacing: -0.04em;
+  line-height: 16px;
+  opacity: 0.6;
+  position: absolute;
+  right: 8px;
+  text-align: right;
+  top: 8px;
 }
 
 .veryLate {
