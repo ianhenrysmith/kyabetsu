@@ -53,7 +53,7 @@ class StageComponent extends Component {
         {
           _.map(items, function(item) {
             return (
-              <Item item={item} />
+              <Item item={item} stage={stage} />
             )
           })
         }

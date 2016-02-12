@@ -7,11 +7,51 @@ var baseStore = require("./baseStore");
 var stagesStore = require("./stagesStore");
 
 var _items = [
-  {id: "1", name: "Smoothies", description: "Life is a grind", stage: "idea", tasks: [{id: "1", done: true, description: "Finish This Task"}] },
-  {id: "2", name: "Defenestrate the Paupers", description: "Involves some heavy lifting", stage: "design", tasks: [{id: "1", done: true, description: "Finish This Task"}] },
-  {id: "3", name: "Caribou", description: "Take a left at Manitoba", stage: "in_progress", tasks: [{id: "1", done: true, description: "Finish This Task"}] },
-  {id: "4", name: "Fish Mongering", description: "You dare insult the son of a shepherd", stage: "acceptance", tasks: [{id: "1", done: true, description: "Finish This Task"}] },
-  {id: "5", name: "Safety Dance", description: "You got Von Miller'd", stage: "deployed", tasks: [{id: "1", done: true, description: "Finish This Task"}] }
+  {
+    id: "1",
+    name: "Smoothies",
+    daysInStage: 2,
+    activity: ["Created by Ian for a hackathon."],
+    description: "Life is a grind",
+    stage: "idea",
+    tasks: [{id: "1", done: true, description: "Finish This Task"}]
+  },
+  {
+    id: "2",
+    name: "Defenestrate the Paupers",
+    daysInStage: 2,
+    activity: ["Created by Ian for a hackathon."],
+    description: "Involves some heavy lifting",
+    stage: "design",
+    tasks: [{id: "1", done: true, description: "Finish This Task"}]
+  },
+  {
+    id: "3",
+    name: "Caribou",
+    daysInStage: 7,
+    activity: ["Created by Ian for a hackathon."],
+    description: "Take a left at Manitoba",
+    stage: "in_progress",
+    tasks: [{id: "1", done: true, description: "Finish This Task"}]
+  },
+  {
+    id: "4",
+    name: "Fish Mongering",
+    daysInStage: 4,
+    activity: ["Created by Ian for a hackathon."],
+    description: "You dare insult the son of a shepherd",
+    stage: "acceptance",
+    tasks: [{id: "1", done: true, description: "Finish This Task"}]
+  },
+  {
+    id: "5",
+    name: "Safety Dance",
+    daysInStage: 0,
+    activity: ["Created by Ian for a hackathon."],
+    description: "You got Von Miller'd",
+    stage: "deployed",
+    tasks: [{id: "1", done: true, description: "Finish This Task"}]
+  }
 ];
 
 var _draggingItemId;
@@ -25,11 +65,20 @@ var setDraggingItem = function(data) {
 };
 
 var setStage = function(item, stageId) {
-  var stage = stagesStore.getStage(stageId);
+  var newStage = stagesStore.getStage(stageId);
+
+  if (item.stage) {
+    var oldStage = stagesStore.getStage(item.stage);
+
+    var activity = `Moved from ${oldStage.name} to ${newStage.name} after ${item.daysInStage} days.`
+
+    item.activity.unshift(activity);
+  }
 
   item.stage = stageId;
+  item.daysInStage = 0;
 
-  _.each(stage.tasks, function(task) {
+  _.each(newStage.tasks, function(task) {
     var newTask = {
       id: _.random(2, 9999999) + "",
       description: task.description,
@@ -45,7 +94,8 @@ var newItem = function(data) {
     id: _.random(6, 9999999) + "",
     name: data.name,
     description: data.description,
-    tasks: []
+    tasks: [],
+    activity: ["Created by Ian on Feb 12"]
   }
 
   _items.push(item);
