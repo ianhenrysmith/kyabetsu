@@ -116,6 +116,10 @@ var taskCompletionChanged = function(data) {
 
   var task = _.find(item.tasks, { id: data.taskId });
 
+  var verb = data.done ? "completed" : "restarted";
+  var activity = `${task.description} ${verb} by Ian on Feb 12.`
+  item.activity.unshift(activity);
+
   task.done = data.done;
 }
 
